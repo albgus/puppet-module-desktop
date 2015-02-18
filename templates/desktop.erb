@@ -1,0 +1,9 @@
+
+[Desktop Entry]
+Name=<%= @title %>
+<% if @comment %>Comment=<%= @comment %><% end %>
+<% if @icon %>Icon=<%= @icon %><% end %>
+Exec=<%= @exec %>
+<% if @terminal %>Terminal=<%= @terminal %><% else %>Terminal=False<% end %>
+Type=Application
+Categories=<%= @categories %>
