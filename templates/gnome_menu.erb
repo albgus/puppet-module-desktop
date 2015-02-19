@@ -1,0 +1,40 @@
+<!DOCTYPE Menu PUBLIC "-//freedesktop//DTD Menu 1.0//EN"
+ "http://www.freedesktop.org/standards/menu-spec/1.0/menu.dtd">
+
+<Menu>
+  <Name><%= @menu_name_real %></Name>
+<% @tree.keys.sort.each do |key| %>
+  <Menu>
+    <Name><%= key %></Name>
+    <% if @tree[key]['directory'] %><Directory><%= @tree[key]['directory'] %></Directory><% end %>
+<% if @tree[key]['included_files'] or @tree[key]['included_categories'] %>
+    <Include>
+<% if @tree[key]['included_files'] -%>
+<% @tree[key]['included_files'].sort.each do |exc| -%>
+      <Filename><%= exc %></Filename>
+<% end -%>
+<% end -%>
+<% if @tree[key]['included_categories'] -%>
+<% @tree[key]['included_categories'].sort.each do |exc| -%>
+      <Category><%= exc %></Category>
+<% end -%>
+<% end -%>
+    </Include>
+<% end -%>
+<% if @tree[key]['excluded_files'] or @tree[key]['excluded_categories'] %>
+    <Exclude>
+<% if @tree[key]['excluded_files'] -%>
+<% @tree[key]['excluded_files'].sort.each do |exc| -%>
+      <Filename><%= exc %></Filename>
+<% end -%>
+<% end -%>
+<% if @tree[key]['excluded_categories'] -%>
+<% @tree[key]['excluded_categories'].sort.each do |exc| -%>
+      <Category><%= exc %></Category>
+<% end -%>
+<% end -%>
+    </Exclude>
+<% end -%>
+  </Menu>
+<% end %>
+</Menu>
