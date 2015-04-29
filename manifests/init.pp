@@ -1,6 +1,6 @@
 
 class desktop (
-  $desktop_backgroun  = undef,
+  $desktop_background = undef,
   $applications       = undef,
   $gconf              = undef,
   $gnome_menus        = undef,
@@ -27,13 +27,19 @@ class desktop (
 
   }
 
-  validate_hash($applications)
-  validate_hash($gconf)
-  validate_hash($gnome_menues)
+  if $application != undef {
+    validate_hash($applications)
+    create_resources('desktop::application', $applications)
+  }
 
-  create_resources('desktop::application', $applications)
+  if $gconf != undef {
+    validate_hash($gconf)
+    create_resources('desktop::gconf', $gconf)
+  }
 
-  create_resources('desktop::gconf', $gconf)
+  if $gnome_menues != undef {
+    validate_hash($gnome_menues)
+    create_resources('desktop::gnome_menu', $gnome_menus)
+  }
 
-  create_resources('desktop::gnome_menu', $gnome_menus)
 }
